@@ -1,6 +1,4 @@
-from django.shortcuts import render
 
-# Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
@@ -14,12 +12,14 @@ def home(request):
         'total_tarefas': Tarefa.objects.count(),
     })
 
+
 def projetos(request):
     lista_projetos = Projeto.objects.all().order_by('id')
 
     return render(request, "projetos.html", {
         'projetos': lista_projetos,
     })
+
 
 def tarefas(request):
     lista_tarefas = Tarefa.objects.select_related(
@@ -29,6 +29,7 @@ def tarefas(request):
     return render(request, "tarefas.html", {
         'tarefas': lista_tarefas,
     })
+
 
 def formulario_projeto(request, pk=None):
     projeto = None
@@ -66,6 +67,7 @@ def formulario_projeto(request, pk=None):
         'projeto': projeto,
     })
 
+
 def formulario_tarefa(request, pk=None):
     tarefa = None
 
@@ -101,6 +103,7 @@ def formulario_tarefa(request, pk=None):
         'form': form,
         'tarefa': tarefa,
     })
+
 
 def confirmaexcl(request, tipo, pk):
 
